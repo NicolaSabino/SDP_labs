@@ -5,14 +5,15 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <sys/wait.h>
-#include <time.h> // nanosleep()
+#include <time.h>
+#include <assert.h>
 
 /* PROTOTYPES */
 void	*th1_body(void *threadarg);
 void 	*th2_body(void *threadarg);
 void 	ms2ts(struct timespec *ts, unsigned long ms);
 int		wait_with_timeout(sem_t *s, int tmax);
-static void sig_alrm(int signo);
+void	alarm_routine(int signo);
 
 /* GLOBAL VARIABLES */
 int		tmax = 0;
@@ -25,11 +26,8 @@ int main(int argc, char **argv){
 	// Use current time as seed for random generator 
 	srand(time(0));
 
-	// semaphore initializations
-	sem_init(s, 0, 0);
-
 	if(argc != 2){
-		printf("wrong parameters");
+		printf("wrong parameters\n");
 		return 1;
 	}
 
@@ -39,9 +37,10 @@ int main(int argc, char **argv){
 	pthread_t	th2;
 
 	s = (sem_t *) malloc(sizeof(sem_t));
+	// semaphore initializations
 	sem_init(s, 0, 0);
 
-	if(pthread_create(&th1, NULL, th1_body, 0) != 0){
+	if(pthread_create(&th1, NULL, th1_body,(void *) tmax) != 0){
 		printf("th1 creation failed\n");
 		return 2;	
 	}
@@ -98,7 +97,7 @@ void *th2_body(void *threadarg){
 	nanosleep(&tt , NULL); 
  
 	// print "performing signal on semaphore s after t milliseconds"
-	printf("performing signal on semaphore s after %lu milliseconds\n", t);
+	printf("th2:\tperforming signal on semaphore s after %lu milliseconds\n", t);
 	sem_post(s);
 	
 	// terminate
@@ -114,7 +113,7 @@ void ms2ts(struct timespec *ts, unsigned long ms)
 int wait_with_timeout(sem_t *s, int tmax){
 	// conversion from mseconds to useconds	
 	int microseconds = tmax * 1000; 
-	signal(SIGALRM, sig_alrm);
+	signal(SIGALRM, alarm_routine);
 	ualarm(microseconds, 0);
 
 	sem_wait(s);
@@ -131,7 +130,7 @@ int wait_with_timeout(sem_t *s, int tmax){
 	}
 }
 
-static void sig_alrm(int signo){
+void alarm_routine(int signo){
 	ualarm(0, 0);
     sem_post(s);
     flag = 1;
