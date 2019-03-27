@@ -1,0 +1,12 @@
+_EO1 Report_
+
+The program is composed by
+- `filler()` method that fills the array with random numbers.
+- `print()` method that prints arrays.
+- `selectionSort()` in order to sort the arrays.
+- `txtFilePrinter()` and `binFilePrinter()` methods that stores sorted arrays
+  in files.
+
+_Additional Notes_
+Since we need different random number at each iteration of our program a seed
+is set at the beginning of the program using the function `srand()`.

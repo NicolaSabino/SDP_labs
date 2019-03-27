@@ -1,0 +1,14 @@
+_EO2 Report_
+
+The program is composed by
+  - 3 shared global variables `next`, `this` and `last`
+  - a `flag` in order to determinate the end of the files
+  - a file pointer fp
+  - 3 thread bodies functions
+
+    While the flag is enable the main process synchronize the variables and create
+  3 threads. It waits the termination of the three trends and continue its
+  execution.
+
+  The charachter casting is performed simply by removing 32 to the character,
+only if it belongs to the interval a-z.

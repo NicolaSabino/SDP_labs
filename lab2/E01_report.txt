@@ -1,0 +1,20 @@
+_E01 Report_
+
+The program is composed by
+- `fill_vector()` in order to fill arrays
+- `generate_file()` it create binary files starting from an array
+- `client_body()` for the client thread
+- two semaphores `sem1` `sem2` and a `mutex` to manage the critical section of
+	the two threads.
+- a global variable `g` contention between the two threads
+
+	The mutex ensures that only one thread per time can acces to each critical
+section and manipulate the global variable `g`.
+
+	The two semaphore ensure the alternance of thread1 and thread1
+
+	Each thread can acces to an `Infos` data structure containing the filename and
+the number of items of the file.
+
+_Additional Notes_
+The main structure of the program is based on E01 of L01

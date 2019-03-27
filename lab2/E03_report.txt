@@ -1,0 +1,15 @@
+_E03 Report_
+
+The program is composed by
+- `th1_body()` and `th2_body()` the two main threads which acts concurrently.
+- `ms2ts()`, an utility fucntion that cast a milliseconds time in a timespec
+	datastructure.
+- `wait_with_timeout()`, a custom wait function.
+- `alarm_routine()` that catch the SIGALRM signal.
+- A global semaphore s.
+- A `flag` using to determinate who post on the sempahore
+
+	The program acts like E02 with the difference that we use `sem_timedwait()`
+instead of the custom function `wait_with_timeout()`. In order to use this
+function we have to store the CLOCK_REALTIME and add the amount of tmax. To do
+so we have to split tmax in seconds and nseconds [lines 85 and 86].

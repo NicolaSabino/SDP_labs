@@ -18,10 +18,6 @@ void 	*thread_input (void *threadarg);
 void 	*thread_processing (void *threadarg);
 void 	*thread_output (void *threadarg);
 
-// Define binary tree node
-typedef struct arg {
-  char c;
-} Argument;
 
 int main(int argc, char *argv[]){
 
@@ -50,21 +46,6 @@ int main(int argc, char *argv[]){
       (void) pthread_join(processing, NULL);
       (void) pthread_join(output, NULL);
   }
-
-  /*FILE *fp;
-  if((fp = fopen(argv[1], "r+")) == NULL){
-    printf("No such file\n");
-    exit(1);
-  }
-  while (fscanf(fp,"%c",&character) == 1) {
-    pthread_t  processing,output;
-    (void) pthread_create(&input, NULL, thread_input, &character);
-    if(this != NULL)  (void) pthread_create(&processing, NULL, thread_processing, &this);
-    if(this != NULL)  (void) pthread_create(&output, NULL, thread_output, &last);
-    (void) pthread_join(input, NULL);
-    (void) pthread_join(processing, NULL);
-    (void) pthread_join(output, NULL);
-  }*/
 
   return 0;
 }

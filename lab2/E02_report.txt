@@ -1,0 +1,12 @@
+_E02 Report_
+
+The program is composed by
+- `th1_body()` and `th2_body()` the two main threads which acts concurrently.
+- `ms2ts()`, an utility fucntion that cast a milliseconds time in a timespec
+	datastructure.
+- A global semaphore s.
+- A `flag` using to determinate who post on the sempahore
+
+	At first the `wait_with_timeout()` registrate the alarm_routine(), if the timer
+expires before the  `sem_post()` into the second thread the falg is turend on
+and the function return 1, otherwise it return 0

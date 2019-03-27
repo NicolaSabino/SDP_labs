@@ -1,0 +1,21 @@
+_EO2 Report_
+
+The program is composed by
+- `filler()` method that fills the array with random numbers.
+- `print()` method that prints arrays.
+- `selectionSort()` in order to sort the arrays.
+- `txtFilePrinter()` and `binFilePrinter()` methods that stores sorted arrays
+  in files.
+- `child1Routine()` and `child2Routine()` in order to distinguish process in
+  the source file.
+
+  Respect to E01, each vector is processed in a different process properly created
+in the `main()` function with the command `fork()`
+[lines 37-40]
+
+  The father process waits the children using the `while` structure, the
+`child_process` counter and the `wait()` command;
+
+_Additional Notes_
+Since we need different random number at each iteration of our program a seed
+is set at the beginning of the program using the function `srand()`.
