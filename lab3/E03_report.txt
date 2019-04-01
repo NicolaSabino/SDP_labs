@@ -20,8 +20,3 @@ track of sub-partitions of the vector in each thread.
 vector.
 - `quickSort(int low, int high)` which call the method partition and do the recursive
 call to itself.
-
-
-
-_Additional Notes_
-The overall structure of the source file is similar to E01
