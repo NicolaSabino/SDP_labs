@@ -1,0 +1,27 @@
+_E03 Report_
+
+The program is composed by
+- A `mapping_procedure()`
+- two implementation of quick sort algorithm
+- A `swap()` procedure
+- A `partition()` procedure
+- A `thread_body()``
+
+	At the beginning the mapping procedure is performed in order to store in a appropriate
+vector the whole file using the method mapping_procedure(char* file_name).
+
+	The multi-thread implementation of the `QuickSort` method is obtained with two
+`pthread_create()`` since the threshold size is reached. Otherwise the normal recursive
+method is called. Furthermore, the structure infos t helps the multi-thread implementation to keeps
+track of sub-partitions of the vector in each thread.
+
+	The normal recursive QuickSort algorithm is provided via two methods.
+- `partition(int low, int high)` which is able to split correctly into two section the
+vector.
+- `quickSort(int low, int high)` which call the method partition and do the recursive
+call to itself.
+
+
+
+_Additional Notes_
+The overall structure of the source file is similar to E01

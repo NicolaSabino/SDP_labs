@@ -1,0 +1,22 @@
+_E01 Report_
+
+The program is composed by
+- struct called `circular_buf_t` in order to implement a circular buffer
+- some methods to handle `circular_buf_t` buffers
+- A provided method  `current_timestamp`
+- A `producer_body()` method
+- A `consumer_body()` method
+-	`choose_buffer()` to implement the choose between the two buffers with a given
+	percentage
+- An additional method called `ms2ts()` to handle timespec variables
+
+	Each buffer, the Normal and the Urgent one, is provided of two semaphores to
+coordinate empty and the full sate. In addition the mitex manage the access into
+the critical section of the buffer.
+
+	The producer call `choose_buffer()` in order to select a target buffer in a
+certain percentage - 80% urgent 20% normal.
+
+	The `sem_trywait()` function is used at row 171 to implement a preference
+between the normal and the urgent buffer. The producer tries always to serve the
+urgent buffer before the normal one

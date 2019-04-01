@@ -1,0 +1,20 @@
+_E02 Report_
+
+The program is composed by
+- struct called `circular_buf_t` in order to implement a circular buffer
+- some methods to handle `circular_buf_t` buffers
+- A `producer_body()` method
+- A `consumer_body()` method
+- An additional method called `ms2ts()` to handle timespec variables
+
+	The program is composed of two threads, a producer and a consumer, accessing
+to a single buffer resource, implemented with custom semaphores.
+
+	The buffer is provided of two semaphores to coordinate empty and the full sate.
+In addition the mitex manage the access into the critical section of the buffer.
+
+	The semaphores are realized via mutexes and conditions in `sema_init()`,
+`sema_destroy()`, `sema_wait()`and `sema_post()`.
+
+_Additional Notes_
+The overall structure of the source file is similar to E01
